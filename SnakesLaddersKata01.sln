@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SnakesLaddersKata01", "SnakesLaddersKata01\SnakesLaddersKata01.csproj", "{07030237-5374-4B44-901C-3AD344AE8E32}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SnakesLadderUnitTest", "SnakesLadderUnitTest\SnakesLadderUnitTest.csproj", "{E7B952E3-C55E-4AD5-8A34-3392BF938CCF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{07030237-5374-4B44-901C-3AD344AE8E32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07030237-5374-4B44-901C-3AD344AE8E32}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07030237-5374-4B44-901C-3AD344AE8E32}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07030237-5374-4B44-901C-3AD344AE8E32}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E7B952E3-C55E-4AD5-8A34-3392BF938CCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7B952E3-C55E-4AD5-8A34-3392BF938CCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7B952E3-C55E-4AD5-8A34-3392BF938CCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7B952E3-C55E-4AD5-8A34-3392BF938CCF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
