@@ -11,7 +11,7 @@ namespace SnakesLadderUnitTest
         {
             var game = new SnakesLadders();
             var actual = game.play(3, 2);
-            var expected = "Player One is on square 5";
+            var expected = "Player 1 is on square 5";
             Assert.Equal(expected, actual);
         }
 
@@ -20,7 +20,7 @@ namespace SnakesLadderUnitTest
         {
             var game = new SnakesLadders();
             var actual = game.play(3, 4);
-            var expected = "Player One is on square 14";
+            var expected = "Player 1 is on square 14";
             Assert.Equal(expected, actual);
         }
 
@@ -29,7 +29,17 @@ namespace SnakesLadderUnitTest
         {
             var game = new SnakesLadders();
             var actual = game.play(8, 8);
-            var expected = "Player One is on square 6";
+            var expected = "Player 1 is on square 6";
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void ShouldReturnPlayerTwoMoveCorrectly()
+        {
+            var game = new SnakesLadders();
+            game.play(1, 4);
+            var actual = game.play(3, 2);
+            var expected = "Player 2 is on square 5";
             Assert.Equal(expected, actual);
         }
     }

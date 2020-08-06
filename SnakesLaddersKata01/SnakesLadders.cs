@@ -9,8 +9,7 @@ namespace SnakesLaddersKata01
         private int playerOneLocation = 0;
         private int playerTwoLocation = 0;
         private int turnCount = 0;
-        private string playerToken = "";
-        
+
         public string play (int die1, int die2)
         {
             var board = new Dictionary<int, int>()
@@ -40,19 +39,19 @@ namespace SnakesLaddersKata01
             
 
             if (turnCount % 2 == 0)
-             //Player One move   
+             //Player One move   refactor to reduce code repition
             {
                 turnCount++;
                 var playerOneLocation = this.playerOneLocation + die1 + die2;
                 if (board.ContainsKey(playerOneLocation))
                 {
                     board.TryGetValue(playerOneLocation, out int location);
-                    var result = $"Player One is on square {location}";
+                    var result = $"Player 1 is on square {location}";
                     return result;
                 }
 
                 {
-                    var result = $"Player One is on square {playerOneLocation}";
+                    var result = $"Player 1 is on square {playerOneLocation}";
                     return result;
                 }
                 return "";
@@ -64,12 +63,12 @@ namespace SnakesLaddersKata01
                 if (board.ContainsKey(playerTwoLocation))
                 {
                     board.TryGetValue(playerTwoLocation, out int location);
-                    var result = $"Player Two is on square {location}";
+                    var result = $"Player 2 is on square {location}";
                     return result;
                 }
 
                 {
-                    var result = $"Player One is on square {playerTwoLocation}";
+                    var result = $"Player 2 is on square {playerTwoLocation}";
                     return result;
                 }
             }
@@ -79,4 +78,4 @@ namespace SnakesLaddersKata01
         
     }
 }
-// add player move, 
+// add if dice is double -  bounce condition if close to 100 -  win if land on 100.
