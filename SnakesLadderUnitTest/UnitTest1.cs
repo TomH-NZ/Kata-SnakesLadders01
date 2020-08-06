@@ -7,7 +7,7 @@ namespace SnakesLadderUnitTest
     public class UnitTest1
     {
         [Fact]
-        public void ShouldReturnCorrectPlayerMove()
+        public void ShouldReturnPlayerOneMoveCorrectly()
         {
             var game = new SnakesLadders();
             var actual = game.play(3, 2);
@@ -16,11 +16,20 @@ namespace SnakesLadderUnitTest
         }
 
         [Fact]
-        public void ShouldReturnCorrectPlayerMove2()
+        public void ShouldReturnPlayerOneLadderMoveCorrectly()
         {
             var game = new SnakesLadders();
             var actual = game.play(3, 4);
             var expected = "Player One is on square 14";
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void ShouldReturnPlayerOneSnakeMoveCorrectly()
+        {
+            var game = new SnakesLadders();
+            var actual = game.play(8, 8);
+            var expected = "Player One is on square 6";
             Assert.Equal(expected, actual);
         }
     }
