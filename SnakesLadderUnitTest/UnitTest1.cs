@@ -1,5 +1,5 @@
 using System;
-using SnakesLaddersKata0;
+using SnakesLaddersKata01;
 using Xunit;
 
 namespace SnakesLadderUnitTest
@@ -12,6 +12,15 @@ namespace SnakesLadderUnitTest
             var game = new SnakesLadders();
             var actual = game.play(3, 2);
             var expected = "Player One is on square 5";
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void ShouldReturnCorrectPlayerMove2()
+        {
+            var game = new SnakesLadders();
+            var actual = game.play(3, 4);
+            var expected = "Player One is on square 14";
             Assert.Equal(expected, actual);
         }
     }

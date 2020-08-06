@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace SnakesLaddersKata0
+namespace SnakesLaddersKata01
 
 
 {
@@ -9,6 +9,7 @@ namespace SnakesLaddersKata0
         private int playerOneLocation = 0;
         private int playerTwoLocation = 0;
         private int turnCount = 0;
+        private string playerToken = "";
         
         public string play (int die1, int die2)
         {
@@ -37,9 +38,42 @@ namespace SnakesLaddersKata0
                 {99, 80}
             };
             
-            
-            
-            return "Player move";
+
+            if (turnCount % 2 == 0)
+             //Player One move   
+            {
+                turnCount++;
+                var playerOneLocation = this.playerOneLocation + die1 + die2;
+                if (board.ContainsKey(playerOneLocation))
+                {
+                    board.TryGetValue(playerOneLocation, out int location);
+                    var result = $"Player One is on square {location}";
+                    return result;
+                }
+
+                {
+                    var result = $"Player One is on square {playerOneLocation}";
+                    return result;
+                }
+                return "";
+            }
+            //Player Two move
+            {
+                turnCount++;
+                var playerTwoLocation = this.playerTwoLocation + die1 + die2;
+                if (board.ContainsKey(playerTwoLocation))
+                {
+                    board.TryGetValue(playerTwoLocation, out int location);
+                    var result = $"Player Two is on square {location}";
+                    return result;
+                }
+
+                {
+                    var result = $"Player One is on square {playerTwoLocation}";
+                    return result;
+                }
+            }
+            return "";
         }
         
         
