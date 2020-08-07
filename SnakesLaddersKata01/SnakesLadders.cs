@@ -39,7 +39,7 @@ namespace SnakesLaddersKata01
             
 
             if (turnCount % 2 == 0)
-             //Player One move   refactor to reduce code repition
+             //Player One move   refactor to reduce code repetition
             {
                 turnCount++;
                 var playerOneLocation = this.playerOneLocation + die1 + die2;
