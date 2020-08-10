@@ -1,16 +1,42 @@
 using System.Collections.Generic;
 
 namespace SnakesLaddersKata01
-
+//ToDo: Look at double dice condition (repeat player turn again)
+//ToDo: Winner lands on sq 100 exactly, bounce back if not exact.
 
 {
     public class SnakesLadders
     {
-        private int playerOneLocation = 0;
-        private int playerTwoLocation = 0;
-        private int turnCount = 0;
+        private  int playerOneLocation = 0;
+        private  int playerTwoLocation = 0;
+        private  int _turnCount = 0;
 
-        public string play (int die1, int die2)
+        public string Play (int die1, int die2)
+        {
+            if (_turnCount % 2 == 0)
+             //Player One move   refactor to reduce code repetition
+            
+            {
+                _turnCount++;
+                return  PlayerMove("Player 1",playerOneLocation, (die1 + die2));
+                
+            }
+            //Player Two move
+            {
+                _turnCount++;
+                return PlayerMove("Player 2", playerTwoLocation, (die1 + die2));
+            }
+        }
+
+        private static string PlayerMove(string playerNumber, int playerLocation, int diceTotal)
+        {
+            playerLocation += diceTotal;
+            playerLocation = locationMap(playerLocation);
+
+            return $"{playerNumber} is on square {playerLocation}";
+        }
+
+        public static int locationMap(int location)
         {
             var board = new Dictionary<int, int>()
             {
@@ -36,46 +62,15 @@ namespace SnakesLaddersKata01
                 {95, 75},
                 {99, 80}
             };
-            
 
-            if (turnCount % 2 == 0)
-             //Player One move   refactor to reduce code repetition
+            if (board.ContainsKey(location))
             {
-                turnCount++;
-                var playerOneLocation = this.playerOneLocation + die1 + die2;
-                if (board.ContainsKey(playerOneLocation))
-                {
-                    board.TryGetValue(playerOneLocation, out int location);
-                    var result = $"Player 1 is on square {location}";
-                    return result;
-                }
-
-                {
-                    var result = $"Player 1 is on square {playerOneLocation}";
-                    return result;
-                }
-                return "";
+                return board[location];
+                
             }
-            //Player Two move
-            {
-                turnCount++;
-                var playerTwoLocation = this.playerTwoLocation + die1 + die2;
-                if (board.ContainsKey(playerTwoLocation))
-                {
-                    board.TryGetValue(playerTwoLocation, out int location);
-                    var result = $"Player 2 is on square {location}";
-                    return result;
-                }
-
-                {
-                    var result = $"Player 2 is on square {playerTwoLocation}";
-                    return result;
-                }
-            }
-            return "";
+            return location;
         }
-        
-        
     }
 }
 // add if dice is double -  bounce condition if close to 100 -  win if land on 100.
+//playerOneLocation += die1 + die2; no need for var at start as it's creating a variable from an already existing type (int).

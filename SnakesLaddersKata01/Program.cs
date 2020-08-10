@@ -6,7 +6,8 @@ namespace SnakesLaddersKata01
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var game = new SnakesLadders();
+            Console.WriteLine(game.Play(1,2));
         }
     }
 }
