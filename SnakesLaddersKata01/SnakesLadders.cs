@@ -1,42 +1,46 @@
 using System.Collections.Generic;
 
 namespace SnakesLaddersKata01
-//ToDo: Look at double dice condition (repeat player turn again)
-//ToDo: Winner lands on sq 100 exactly, bounce back if not exact.
+    // TODO - Look at double dice condition (repeat player turn again)
+    // TODO - Winner lands on sq 100 exactly, bounce back if not exact.
+    // TODO - Change player turn into ternary, for player1/player2, create new branch
 
 {
     public class SnakesLadders
     {
-        private  int playerOneLocation = 0;
-        private  int playerTwoLocation = 0;
-        private  int _turnCount = 0;
+        private int playerOneLocation = 0;
+        private int playerTwoLocation = 0;
+        private int _turnCount;
 
-        public string Play (int die1, int die2)
+        public string Play(int die1, int die2)
         {
-            if (_turnCount % 2 == 0)
-             //Player One move   refactor to reduce code repetition
-            
+            var instruction = "";
+            _turnCount++;
+            if (_turnCount % 2 == 1)
+            {
+                instruction= PlayerMove("Player 1", playerOneLocation, (die1 + die2));
+            }
+            else
+            {
+                instruction = PlayerMove("Player 2", playerTwoLocation, (die1 + die2));
+            }
+
+            if (die1 == die2)
             {
                 _turnCount++;
-                return  PlayerMove("Player 1",playerOneLocation, (die1 + die2));
-                
             }
-            //Player Two move
-            {
-                _turnCount++;
-                return PlayerMove("Player 2", playerTwoLocation, (die1 + die2));
-            }
+            return instruction;
         }
 
         private static string PlayerMove(string playerNumber, int playerLocation, int diceTotal)
         {
             playerLocation += diceTotal;
-            playerLocation = locationMap(playerLocation);
+            playerLocation = LocationMap(playerLocation);
 
             return $"{playerNumber} is on square {playerLocation}";
         }
 
-        public static int locationMap(int location)
+        private static int LocationMap(int location)
         {
             var board = new Dictionary<int, int>()
             {
@@ -63,14 +67,10 @@ namespace SnakesLaddersKata01
                 {99, 80}
             };
 
-            if (board.ContainsKey(location))
-            {
-                return board[location];
-                
-            }
-            return location;
+            return board.ContainsKey(location) ? board[location] : location;
         }
     }
 }
 // add if dice is double -  bounce condition if close to 100 -  win if land on 100.
 //playerOneLocation += die1 + die2; no need for var at start as it's creating a variable from an already existing type (int).
+//recursion - can call a method from inside itself

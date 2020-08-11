@@ -6,6 +6,23 @@ namespace SnakesLadderUnitTest
 {
     public class UnitTest1
     {
+        private SnakesLadders SnakesTest = new SnakesLadders();
+
+        [Fact]
+        public void ShouldRepeatCorrectly()
+        {
+            var actual = SnakesTest.Play(1, 2);
+            var expected = "Player 1 is on square 3";
+            Assert.Equal(expected, actual);
+        }
+        [Fact]
+        public void ShouldRepeatCorrectlyAgain()
+        {
+            var actual = SnakesTest.Play(1, 2);
+            var expected = "Player 2 is on square 3";
+            Assert.Equal(expected, actual);
+        }
+        
         [Fact]
         public void ShouldReturnPlayerOneMoveCorrectly()
         {
