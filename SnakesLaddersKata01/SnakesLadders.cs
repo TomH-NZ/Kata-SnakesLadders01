@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 
 namespace SnakesLaddersKata01
-    // TODO - Look at double dice condition (repeat player turn again)
-    // TODO - Winner lands on sq 100 exactly, bounce back if not exact.
-    // TODO - Change player turn into ternary, for player1/player2, create new branch
+    // ToDo - Look at double dice condition (repeat player turn again)
+    // ToDo - Winner lands on sq 100 exactly, bounce back if not exact.
+    // ToDo - Change player turn into ternary, for player1/player2, create new branch
 
 {
     public class SnakesLadders
