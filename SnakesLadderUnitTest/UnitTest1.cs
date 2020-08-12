@@ -59,6 +59,15 @@ namespace SnakesLadderUnitTest
             var expected = "Player 2 is on square 5";
             Assert.Equal(expected, actual);
         }
+        
+        [Fact]
+        public void ShouldReturnCorrectWinCondition()
+        {
+           var game = new SnakesLadders();
+           var actual = game.Play(50, 50);
+           var expected = "Player 1 has won!";
+           Assert.Equal(expected, actual);
+        }
     }
 }
 
