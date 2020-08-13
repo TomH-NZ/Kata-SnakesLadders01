@@ -29,7 +29,7 @@ namespace SnakesLaddersKata01
             {
                 _turnCount++;
             }
-            // ToDo add in win condition for reaching sq 100. if(player 1), elseif(player2), else return instructions
+            
             return instruction;
         }
 
@@ -39,7 +39,7 @@ namespace SnakesLaddersKata01
             playerLocation = LocationMap(playerLocation);
 
             return $"{playerNumber} is on square {playerLocation}";
-        }
+        } // ToDo add in win condition for reaching sq 100. if(player 1), elseif(player2), else return instructions
 
         private static int LocationMap(int location)
         {
