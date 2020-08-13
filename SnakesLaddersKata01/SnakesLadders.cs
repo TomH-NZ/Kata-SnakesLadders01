@@ -1,10 +1,7 @@
 using System.Collections.Generic;
 
 namespace SnakesLaddersKata01
-    // ToDo - Look at double dice condition (repeat player turn again)
     // ToDo - Winner lands on sq 100 exactly, bounce back if not exact.
-    // ToDo - Change player turn into ternary, for player1/player2, create new branch
-
 {
     public class SnakesLadders
     {
@@ -12,17 +9,17 @@ namespace SnakesLaddersKata01
         private int playerTwoLocation = 0;
         private int _turnCount;
 
-        public string Play(int die1, int die2)
+        public string play(int die1, int die2) // using lowercase play as the kata needs it in CodeWars.
         {
             var instruction = "";
             _turnCount++;
             if (_turnCount % 2 == 1)
             {
-                instruction= PlayerMove("Player 1", playerOneLocation, (die1 + die2));
+                instruction= Move("Player 1", (die1 + die2)); 
             }
             else
             {
-                instruction = PlayerMove("Player 2", playerTwoLocation, (die1 + die2));
+                instruction = Move("Player 2", (die1 + die2));
             }
 
             if (die1 == die2)
@@ -33,13 +30,21 @@ namespace SnakesLaddersKata01
             return instruction;
         }
 
-        private static string PlayerMove(string playerNumber, int playerLocation, int diceTotal)
+        private string Move(string playerNumber, int diceTotal)
         {
-            playerLocation += diceTotal;
-            playerLocation = LocationMap(playerLocation);
-
-            return $"{playerNumber} is on square {playerLocation}";
-        } // ToDo add in win condition for reaching sq 100. if(player 1), elseif(player2), else return instructions
+            if (playerNumber == "Player 1")
+            {
+                playerOneLocation += diceTotal;
+                playerOneLocation = LocationMap(playerOneLocation);
+                return CreatePlayerMessage(playerOneLocation, playerNumber);
+            }
+            else
+            {
+                playerTwoLocation += diceTotal;
+                playerTwoLocation = LocationMap(playerTwoLocation);
+                return CreatePlayerMessage(playerTwoLocation, playerNumber);
+            }
+        }
 
         private static int LocationMap(int location)
         {
@@ -70,8 +75,16 @@ namespace SnakesLaddersKata01
 
             return board.ContainsKey(location) ? board[location] : location;
         }
+
+        private static string CreatePlayerMessage(int playerLocation, string playerName)
+        {
+            switch (playerLocation)
+            {
+                case 100:
+                    return $"{playerName} has won!";
+                default:
+                    return $"{playerName} is on square {playerLocation}";
+            }
+        }
     }
 }
-// add if dice is double -  bounce condition if close to 100 -  win if land on 100.
-//playerOneLocation += die1 + die2; no need for var at start as it's creating a variable from an already existing type (int).
-//recursion - can call a method from inside itself

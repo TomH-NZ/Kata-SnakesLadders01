@@ -6,28 +6,11 @@ namespace SnakesLadderUnitTest
 {
     public class UnitTest1
     {
-        private SnakesLadders SnakesTest = new SnakesLadders();
-
-        [Fact]
-        public void ShouldRepeatCorrectly()
-        {
-            var actual = SnakesTest.Play(1, 2);
-            var expected = "Player 1 is on square 3";
-            Assert.Equal(expected, actual);
-        }
-        [Fact]
-        public void ShouldRepeatCorrectlyAgain()
-        {
-            var actual = SnakesTest.Play(1, 2);
-            var expected = "Player 2 is on square 3";
-            Assert.Equal(expected, actual);
-        }
-        
         [Fact]
         public void ShouldReturnPlayerOneMoveCorrectly()
         {
             var game = new SnakesLadders();
-            var actual = game.Play(3, 2);
+            var actual = game.play(3, 2);
             var expected = "Player 1 is on square 5";
             Assert.Equal(expected, actual);
         }
@@ -36,7 +19,7 @@ namespace SnakesLadderUnitTest
         public void ShouldReturnPlayerOneLadderMoveCorrectly()
         {
             var game = new SnakesLadders();
-            var actual = game.Play(3, 4);
+            var actual = game.play(3, 4);
             var expected = "Player 1 is on square 14";
             Assert.Equal(expected, actual);
         }
@@ -45,7 +28,7 @@ namespace SnakesLadderUnitTest
         public void ShouldReturnPlayerOneSnakeMoveCorrectly()
         {
             var game = new SnakesLadders();
-            var actual = game.Play(8, 8);
+            var actual = game.play(8, 8);
             var expected = "Player 1 is on square 6";
             Assert.Equal(expected, actual);
         }
@@ -54,19 +37,39 @@ namespace SnakesLadderUnitTest
         public void ShouldReturnPlayerTwoMoveCorrectly()
         {
             var game = new SnakesLadders();
-            game.Play(1, 4);
-            var actual = game.Play(3, 2);
+            game.play(1, 4);
+            var actual = game.play(3, 2);
             var expected = "Player 2 is on square 5";
             Assert.Equal(expected, actual);
         }
         
         [Fact]
-        public void ShouldReturnCorrectWinCondition()
+        public void ShouldReturnCorrectWinConditionForPlayerOne()
         {
            var game = new SnakesLadders();
-           var actual = game.Play(50, 50);
+           var actual = game.play(50, 50);
            var expected = "Player 1 has won!";
            Assert.Equal(expected, actual);
+        }
+        
+        [Fact]
+        public void ShouldReturnCorrectWinConditionForPlayerTwo()
+        {
+            var game = new SnakesLadders();
+            game.play(2, 4);
+            var actual = game.play(50, 50);
+            var expected = "Player 2 has won!";
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void ShouldReturnCorrectDoubleDiceResult()
+        {
+            var game = new SnakesLadders();
+            game.play(1, 1);
+            var actual = game.play(1,2);
+            var expected = "Player 1 is on square 41";
+            Assert.Equal(expected, actual);
         }
     }
 }
