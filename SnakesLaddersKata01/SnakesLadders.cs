@@ -2,24 +2,41 @@ using System.Collections.Generic;
 
 namespace SnakesLaddersKata01
     // ToDo - Winner lands on sq 100 exactly, bounce back if not exact.
+    // ToDo - Fix test returning incorrect player location on double dice test. 
 {
     public class SnakesLadders
     {
-        private int playerOneLocation = 0;
-        private int playerTwoLocation = 0;
+        //private int playerOneLocation = 0;
+        //private int playerTwoLocation = 0;
+        private Dictionary<int, int> players = new Dictionary<int, int>()
+        {
+            {1, 0},
+            {2, 0}
+        };
         private int _turnCount;
 
         public string play(int die1, int die2) // using lowercase play as the kata needs it in CodeWars.
         {
-            var instruction = "";
+            var instruction = string.Empty;
             _turnCount++;
+
+            var currentPlayer = 0;
+            
             if (_turnCount % 2 == 1)
             {
-                instruction= Move("Player 1", (die1 + die2)); 
+                //instruction= Move("Player 1", (die1 + die2));
+                currentPlayer = 1;
+                players[currentPlayer] += die1 + die2;
+                instruction = CreatePlayerMessage(LocationMap(players[currentPlayer]), "Player 1");
+                players[currentPlayer] += LocationMap(players[currentPlayer]);
             }
             else
             {
-                instruction = Move("Player 2", (die1 + die2));
+                //instruction = Move("Player 2", (die1 + die2));
+                currentPlayer = 2;
+                players[currentPlayer] += die1 + die2;
+                instruction = CreatePlayerMessage(LocationMap(players[currentPlayer]), "Player 2");
+                players[currentPlayer] += LocationMap(players[currentPlayer]);
             }
 
             if (die1 == die2)
@@ -30,7 +47,7 @@ namespace SnakesLaddersKata01
             return instruction;
         }
 
-        private string Move(string playerNumber, int diceTotal)
+        /*private string Move(string playerNumber, int diceTotal)
         {
             if (playerNumber == "Player 1")
             {
@@ -44,7 +61,7 @@ namespace SnakesLaddersKata01
                 playerTwoLocation = LocationMap(playerTwoLocation);
                 return CreatePlayerMessage(playerTwoLocation, playerNumber);
             }
-        }
+        }*/
 
         private static int LocationMap(int location)
         {

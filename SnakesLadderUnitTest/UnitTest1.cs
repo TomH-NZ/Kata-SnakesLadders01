@@ -71,9 +71,19 @@ namespace SnakesLadderUnitTest
             var expected = "Player 1 is on square 41";
             Assert.Equal(expected, actual);
         }
+
+        [Fact]
+        public void ShouldReturnBouncebackLocation()
+        {
+            var game = new SnakesLadders();
+            game.play(48, 48);
+            var actual = game.play(3, 5);
+            var expected = "Player 1 is on square 96";
+            Assert.Equal(expected, actual);
+        }
     }
 }
 
 // Add unit tests for additional player moves
 
-//https://www.codewars.com/kata/587136ba2eefcb92a9000027/train/csharp
+// https://www.codewars.com/kata/587136ba2eefcb92a9000027/train/csharp
