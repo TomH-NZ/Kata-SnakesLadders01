@@ -2,18 +2,16 @@ using System.Collections.Generic;
 
 namespace SnakesLaddersKata01
     // ToDo - Winner lands on sq 100 exactly, bounce back if not exact.
-    // ToDo - Fix test returning incorrect player location on double dice test. 
 {
     public class SnakesLadders
     {
-        //private int playerOneLocation = 0;
-        //private int playerTwoLocation = 0;
-        private Dictionary<int, int> players = new Dictionary<int, int>()
+        private readonly Dictionary<int, int> playerLocations = new Dictionary<int, int>()
         {
             {1, 0},
             {2, 0}
         };
         private int _turnCount;
+        private const int WinningSquare = 100;
 
         public string play(int die1, int die2) // using lowercase play as the kata needs it in CodeWars.
         {
@@ -22,22 +20,16 @@ namespace SnakesLaddersKata01
 
             var currentPlayer = 0;
             
-            if (_turnCount % 2 == 1)
+            currentPlayer = _turnCount % 2 == 1 ? 1 : 2;
+
+            playerLocations[currentPlayer] += die1 + die2;
+            var stepsPastWinningSquare = playerLocations[currentPlayer] - WinningSquare;
+            if (playerLocations[currentPlayer] > WinningSquare)
             {
-                //instruction= Move("Player 1", (die1 + die2));
-                currentPlayer = 1;
-                players[currentPlayer] += die1 + die2;
-                instruction = CreatePlayerMessage(LocationMap(players[currentPlayer]), "Player 1");
-                players[currentPlayer] += LocationMap(players[currentPlayer]);
+                playerLocations[currentPlayer] = WinningSquare - (stepsPastWinningSquare);
             }
-            else
-            {
-                //instruction = Move("Player 2", (die1 + die2));
-                currentPlayer = 2;
-                players[currentPlayer] += die1 + die2;
-                instruction = CreatePlayerMessage(LocationMap(players[currentPlayer]), "Player 2");
-                players[currentPlayer] += LocationMap(players[currentPlayer]);
-            }
+            instruction = CreatePlayerMessage(LocationMap(playerLocations[currentPlayer]), $"Player {currentPlayer}");
+            playerLocations[currentPlayer] = LocationMap(playerLocations[currentPlayer]);
 
             if (die1 == die2)
             {
@@ -46,22 +38,6 @@ namespace SnakesLaddersKata01
             
             return instruction;
         }
-
-        /*private string Move(string playerNumber, int diceTotal)
-        {
-            if (playerNumber == "Player 1")
-            {
-                playerOneLocation += diceTotal;
-                playerOneLocation = LocationMap(playerOneLocation);
-                return CreatePlayerMessage(playerOneLocation, playerNumber);
-            }
-            else
-            {
-                playerTwoLocation += diceTotal;
-                playerTwoLocation = LocationMap(playerTwoLocation);
-                return CreatePlayerMessage(playerTwoLocation, playerNumber);
-            }
-        }*/
 
         private static int LocationMap(int location)
         {
@@ -97,11 +73,13 @@ namespace SnakesLaddersKata01
         {
             switch (playerLocation)
             {
-                case 100:
-                    return $"{playerName} has won!";
+                case WinningSquare:
+                    return $"{playerName} Wins!";
                 default:
                     return $"{playerName} is on square {playerLocation}";
             }
         }
     }
 }
+// Tests in Kata failed due to game not stopping once player has won.  Add condition for player winning
+//game and returning "Game Over!"

@@ -4,19 +4,30 @@ using Xunit;
 
 namespace SnakesLadderUnitTest
 {
-    public class UnitTest1
+    public class ShouldReturn
     {
         [Fact]
-        public void ShouldReturnPlayerOneMoveCorrectly()
+        public void PlayerOneMoveCorrectly()
         {
             var game = new SnakesLadders();
             var actual = game.play(3, 2);
             var expected = "Player 1 is on square 5";
             Assert.Equal(expected, actual);
+        }        
+        [Fact]
+        public void AlternatePlayerMoves()
+        {
+            var game = new SnakesLadders();
+            var playerOneActual = game.play(3, 2);
+            var playerOneExpected = "Player 1 is on square 5";  
+            Assert.Equal(playerOneExpected, playerOneActual);
+            var playerTwoActual = game.play(3, 7);
+            var playerTwoExpected = "Player 2 is on square 10";
+            Assert.Equal(playerTwoExpected, playerTwoActual);
         }
 
         [Fact]
-        public void ShouldReturnPlayerOneLadderMoveCorrectly()
+        public void PlayerOneLadderMoveCorrectly()
         {
             var game = new SnakesLadders();
             var actual = game.play(3, 4);
@@ -25,16 +36,17 @@ namespace SnakesLadderUnitTest
         }
 
         [Fact]
-        public void ShouldReturnPlayerOneSnakeMoveCorrectly()
+        public void PlayerOneSnakeMoveCorrectly()
         {
             var game = new SnakesLadders();
             var actual = game.play(8, 8);
             var expected = "Player 1 is on square 6";
             Assert.Equal(expected, actual);
         }
+        
 
         [Fact]
-        public void ShouldReturnPlayerTwoMoveCorrectly()
+        public void PlayerTwoMoveCorrectly()
         {
             var game = new SnakesLadders();
             game.play(1, 4);
@@ -44,7 +56,7 @@ namespace SnakesLadderUnitTest
         }
         
         [Fact]
-        public void ShouldReturnCorrectWinConditionForPlayerOne()
+        public void CorrectWinConditionForPlayerOne()
         {
            var game = new SnakesLadders();
            var actual = game.play(50, 50);
@@ -53,7 +65,7 @@ namespace SnakesLadderUnitTest
         }
         
         [Fact]
-        public void ShouldReturnCorrectWinConditionForPlayerTwo()
+        public void CorrectWinConditionForPlayerTwo()
         {
             var game = new SnakesLadders();
             game.play(2, 4);
@@ -63,7 +75,7 @@ namespace SnakesLadderUnitTest
         }
 
         [Fact]
-        public void ShouldReturnCorrectDoubleDiceResult()
+        public void CorrectDoubleDiceResult()
         {
             var game = new SnakesLadders();
             game.play(1, 1);
@@ -73,7 +85,7 @@ namespace SnakesLadderUnitTest
         }
 
         [Fact]
-        public void ShouldReturnBouncebackLocation()
+        public void BounceBackLocationForPlayerOne()
         {
             var game = new SnakesLadders();
             game.play(48, 48);
@@ -81,9 +93,20 @@ namespace SnakesLadderUnitTest
             var expected = "Player 1 is on square 96";
             Assert.Equal(expected, actual);
         }
+
+        [Fact]
+        public void BounceBackLocationForPlayerTwo()
+        {
+            var game = new SnakesLadders();
+            game.play(1, 2);
+            game.play(48, 48);
+            var actual = game.play(5, 6);
+            var expected = "Player 2 is on square 93";
+            Assert.Equal(expected, actual);
+        }
+        
     }
 }
 
-// Add unit tests for additional player moves
-
 // https://www.codewars.com/kata/587136ba2eefcb92a9000027/train/csharp
+// possibly start on 0 test
