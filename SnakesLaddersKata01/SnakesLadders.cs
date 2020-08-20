@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 
 namespace SnakesLaddersKata01
-    // ToDo - Winner lands on sq 100 exactly, bounce back if not exact.
 {
     public class SnakesLadders
     {
@@ -12,6 +11,7 @@ namespace SnakesLaddersKata01
         };
         private int _turnCount;
         private const int WinningSquare = 100;
+        private bool hasWon = false;
 
         public string play(int die1, int die2) // using lowercase play as the kata needs it in CodeWars.
         {
@@ -30,6 +30,7 @@ namespace SnakesLaddersKata01
             }
             instruction = CreatePlayerMessage(LocationMap(playerLocations[currentPlayer]), $"Player {currentPlayer}");
             playerLocations[currentPlayer] = LocationMap(playerLocations[currentPlayer]);
+            
 
             if (die1 == die2)
             {
@@ -69,17 +70,25 @@ namespace SnakesLaddersKata01
             return board.ContainsKey(location) ? board[location] : location;
         }
 
-        private static string CreatePlayerMessage(int playerLocation, string playerName)
+        private string CreatePlayerMessage(int playerLocation, string playerName)
         {
+            switch (hasWon)
+            {
+                case true:
+                    return "Game over!";
+            }
             switch (playerLocation)
             {
                 case WinningSquare:
+                    hasWon = true;
                     return $"{playerName} Wins!";
                 default:
                     return $"{playerName} is on square {playerLocation}";
             }
+
+            
         }
     }
 }
-// Tests in Kata failed due to game not stopping once player has won.  Add condition for player winning
+// Tests in Kata failed due to game not stopping once a player has won.  Add condition for player winning
 //game and returning "Game Over!"

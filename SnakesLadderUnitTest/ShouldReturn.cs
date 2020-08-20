@@ -60,7 +60,7 @@ namespace SnakesLadderUnitTest
         {
            var game = new SnakesLadders();
            var actual = game.play(50, 50);
-           var expected = "Player 1 has won!";
+           var expected = "Player 1 Wins!";
            Assert.Equal(expected, actual);
         }
         
@@ -70,7 +70,7 @@ namespace SnakesLadderUnitTest
             var game = new SnakesLadders();
             game.play(2, 4);
             var actual = game.play(50, 50);
-            var expected = "Player 2 has won!";
+            var expected = "Player 2 Wins!";
             Assert.Equal(expected, actual);
         }
 
@@ -104,7 +104,17 @@ namespace SnakesLadderUnitTest
             var expected = "Player 2 is on square 93";
             Assert.Equal(expected, actual);
         }
-        
+
+        [Fact]
+        public void GameOverMessage()
+        {
+            var game = new SnakesLadders();
+            game.play(48, 48);
+            game.play(1,3);
+            var actual = game.play(1, 2);
+            var expected = "Game over!";
+            Assert.Equal(expected, actual);
+        }
     }
 }
 
