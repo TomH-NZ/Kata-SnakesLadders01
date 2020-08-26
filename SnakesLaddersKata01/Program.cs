@@ -13,4 +13,3 @@ namespace SnakesLaddersKata01
         }
     }
 }
-// dictionary of board, if base of ladder map to head of ladder. if head of snake, map to tail of snake.

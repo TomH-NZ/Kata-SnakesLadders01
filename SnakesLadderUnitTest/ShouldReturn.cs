@@ -115,6 +115,15 @@ namespace SnakesLadderUnitTest
             var expected = "Game over!";
             Assert.Equal(expected, actual);
         }
+
+        [Fact]
+        public void CorrectPlayerName()
+        {
+            var firstPlayer = new Player("Player 9");
+            var secondPlayer = new  Player("Player 6");
+            var game = new SnakesLadders(firstPlayer, secondPlayer); 
+            
+        }
     }
 }
 
