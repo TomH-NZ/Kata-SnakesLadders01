@@ -1,16 +1,65 @@
 using System.Collections.Generic;
 
 namespace SnakesLaddersKata01
-
-
 {
     public class SnakesLadders
     {
-        private int playerOneLocation = 0;
-        private int playerTwoLocation = 0;
-        private int turnCount = 0;
 
-        public string play (int die1, int die2)
+        private static Player playerOne;
+        private static Player playerTwo;
+        private int _turnCount;
+        private const int WinningSquare = 100;
+        private bool hasWon = false;
+        private readonly Dictionary<Player, int> playerLocations; 
+        
+        
+        public SnakesLadders(Player firstPlayer, Player secondPlayer)
+        {
+            playerOne = firstPlayer;
+            playerTwo = secondPlayer;
+            playerLocations = new Dictionary<Player, int>()
+            {
+                {playerOne, 0},
+                {playerTwo, 0}
+            };
+        }
+        public SnakesLadders()
+        {
+            playerOne = new Player("Player 1");
+            playerTwo = new Player("Player 2");
+            playerLocations = new Dictionary<Player, int>()
+            {
+                {playerOne, 0},
+                {playerTwo, 0}
+            };
+        }
+
+        public string play(int die1, int die2) // using lowercase play as the kata needs it in CodeWars.
+        {
+            var instruction = string.Empty;
+            _turnCount++;
+
+            var currentPlayer = _turnCount % 2 == 1 ? playerOne : playerTwo;
+
+            playerLocations[currentPlayer] += die1 + die2;
+            var stepsPastWinningSquare = playerLocations[currentPlayer] - WinningSquare;
+            if (playerLocations[currentPlayer] > WinningSquare)
+            {
+                playerLocations[currentPlayer] = WinningSquare - (stepsPastWinningSquare);
+            }
+            instruction = CreatePlayerMessage(LocationMap(playerLocations[currentPlayer]), $"{currentPlayer.Name}");
+            playerLocations[currentPlayer] = LocationMap(playerLocations[currentPlayer]);
+            
+
+            if (die1 == die2)
+            {
+                _turnCount++;
+            }
+            
+            return instruction;
+        }
+
+        private static int LocationMap(int location)
         {
             var board = new Dictionary<int, int>()
             {
@@ -36,46 +85,28 @@ namespace SnakesLaddersKata01
                 {95, 75},
                 {99, 80}
             };
-            
 
-            if (turnCount % 2 == 0)
-             //Player One move   refactor to reduce code repetition
-            {
-                turnCount++;
-                var playerOneLocation = this.playerOneLocation + die1 + die2;
-                if (board.ContainsKey(playerOneLocation))
-                {
-                    board.TryGetValue(playerOneLocation, out int location);
-                    var result = $"Player 1 is on square {location}";
-                    return result;
-                }
-
-                {
-                    var result = $"Player 1 is on square {playerOneLocation}";
-                    return result;
-                }
-                return "";
-            }
-            //Player Two move
-            {
-                turnCount++;
-                var playerTwoLocation = this.playerTwoLocation + die1 + die2;
-                if (board.ContainsKey(playerTwoLocation))
-                {
-                    board.TryGetValue(playerTwoLocation, out int location);
-                    var result = $"Player 2 is on square {location}";
-                    return result;
-                }
-
-                {
-                    var result = $"Player 2 is on square {playerTwoLocation}";
-                    return result;
-                }
-            }
-            return "";
+            return board.ContainsKey(location) ? board[location] : location;
         }
-        
-        
+
+        private string CreatePlayerMessage(int playerLocation, string playerName)
+        {
+            switch (hasWon)
+            {
+                case true:
+                    return "Game over!";
+            }
+            switch (playerLocation)
+            {
+                case WinningSquare:
+                    hasWon = true;
+                    return $"{playerName} Wins!";
+                default:
+                    return $"{playerName} is on square {playerLocation}";
+            }
+
+            
+        }
     }
 }
-// add if dice is double -  bounce condition if close to 100 -  win if land on 100.
+
