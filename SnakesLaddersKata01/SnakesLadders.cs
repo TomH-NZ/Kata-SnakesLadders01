@@ -7,27 +7,32 @@ namespace SnakesLaddersKata01
 
         private static Player playerOne;
         private static Player playerTwo;
-
+        private int _turnCount;
+        private const int WinningSquare = 100;
+        private bool hasWon = false;
+        private readonly Dictionary<Player, int> playerLocations; 
+        
+        
         public SnakesLadders(Player firstPlayer, Player secondPlayer)
         {
             playerOne = firstPlayer;
             playerTwo = secondPlayer;
- 
+            playerLocations = new Dictionary<Player, int>()
+            {
+                {playerOne, 0},
+                {playerTwo, 0}
+            };
         }
         public SnakesLadders()
         {
-            playerOne = new Player("Player 1");;
+            playerOne = new Player("Player 1");
             playerTwo = new Player("Player 2");
+            playerLocations = new Dictionary<Player, int>()
+            {
+                {playerOne, 0},
+                {playerTwo, 0}
+            };
         }
-        
-        private int _turnCount;
-        private const int WinningSquare = 100;
-        private bool hasWon = false;
-        private readonly Dictionary<Player, int> playerLocations = new Dictionary<Player, int>()
-        {
-            {playerOne, 0},
-            {playerTwo, 0}
-        };
 
         public string play(int die1, int die2) // using lowercase play as the kata needs it in CodeWars.
         {

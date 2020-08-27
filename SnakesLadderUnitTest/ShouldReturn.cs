@@ -117,13 +117,26 @@ namespace SnakesLadderUnitTest
         }
 
         [Fact]
-        public void CorrectPlayerName()
+        public void CorrectFirstPlayerName()
         {
             var firstPlayer = new Player("Player 9");
             var secondPlayer = new  Player("Player 6");
-            var game = new SnakesLadders(firstPlayer, secondPlayer); 
-            
+            var game = new SnakesLadders(firstPlayer, secondPlayer);
+            var expected = "Player 9 is on square 3";
+            var actual = game.play(1, 2);
+            Assert.Equal(expected, actual);
+        }[Fact]
+        public void CorrectSecondPlayerName()
+        {
+            var firstPlayer = new Player("Player 9");
+            var secondPlayer = new  Player("Player 6");
+            var game = new SnakesLadders(firstPlayer, secondPlayer);
+            var expected = "Player 6 is on square 3";
+            game.play(5, 6);
+            var actual = game.play(1, 2);
+            Assert.Equal(expected, actual);
         }
+        
     }
 }
 

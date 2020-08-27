@@ -2,9 +2,9 @@ namespace SnakesLaddersKata01
 {
     public class Player
     {
-        public string Name { get; } // use 'prop' then tab to create property
+        public string Name { get; } 
 
-        public Player(string name) // use 'ctor' then tab to creat the constructor.
+        public Player(string name)
         {
             Name = name;
         }
