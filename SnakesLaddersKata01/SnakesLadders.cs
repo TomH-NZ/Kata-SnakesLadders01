@@ -47,7 +47,7 @@ namespace SnakesLaddersKata01
             {
                 playerLocations[currentPlayer] = WinningSquare - (stepsPastWinningSquare);
             }
-            instruction = CreatePlayerMessage(LocationMap(playerLocations[currentPlayer]), $"{currentPlayer.Name}");
+            instruction = CreatePlayerMessage(LocationMap(playerLocations[currentPlayer]), currentPlayer);
             playerLocations[currentPlayer] = LocationMap(playerLocations[currentPlayer]);
             
 
@@ -89,24 +89,27 @@ namespace SnakesLaddersKata01
             return board.ContainsKey(location) ? board[location] : location;
         }
 
-        private string CreatePlayerMessage(int playerLocation, string playerName)
+        private string CreatePlayerMessage(int playerLocation, Player currentPlayer)
         {
             switch (hasWon)
             {
                 case true:
                     return "Game over!";
             }
+            
             switch (playerLocation)
             {
                 case WinningSquare:
                     hasWon = true;
-                    return $"{playerName} Wins!";
+                    return $"{currentPlayer.Name} Wins!";
                 default:
-                    return $"{playerName} is on square {playerLocation}";
+                    return $"{currentPlayer.Name} is on square {playerLocation}";
             }
-
             
         }
     }
 }
 
+// add player is dead function after switch(haswon).
+// needs access to current player health total. if health = 0, return Sorry, player is dead.
+// Add function isPlayerDead to the CreatePlayerMessage method.  
