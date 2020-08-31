@@ -1,3 +1,4 @@
+using System;
 using SnakesLaddersKata01;
 using Xunit;
 
@@ -36,6 +37,28 @@ namespace SnakesLadderUnitTest
             var actualSecondPlayerHealth = secondPlayer.Health;
             Assert.Equal(expectedSecondPlayerHealth, actualSecondPlayerHealth);
             Assert.Equal(2, firstPlayer.Health);
+        }
+
+        [Fact]
+        public void LoseHealthGainHealthFirstPlayer()
+        {
+            var firstPlayer = new Player("Player 1");
+            var expectedPlayerOneHealth = 2;
+            firstPlayer.LoseHealth();
+            firstPlayer.GainHealth();
+            var actualFirstPlayerHealth = firstPlayer.Health;
+            Assert.Equal(expectedPlayerOneHealth, actualFirstPlayerHealth);
+        }
+
+        [Fact]
+        public void LandOnLoseHealthSquare()
+        {
+            var firstPlayer = new Player("Player 1");
+            var expectedPlayerHealth = 1;
+            var game = new SnakesLadders();
+            game.play(19, 21);
+            var actualPlayerHealth = Player.Health;
+            Assert.Equal(expectedPlayerHealth, actualPlayerHealth);
         }
     }
 }

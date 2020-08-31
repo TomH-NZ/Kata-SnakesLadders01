@@ -1,4 +1,3 @@
-using System;
 using SnakesLaddersKata01;
 using Xunit;
 

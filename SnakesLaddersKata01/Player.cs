@@ -16,7 +16,12 @@ namespace SnakesLaddersKata01
             Health -= 1;
         }
 
-        public bool isPlayerDead()
+        public void GainHealth()
+        {
+            Health += 1;
+        }
+
+        public bool IsPlayerDead()
         {
             return Health == 0;
         }

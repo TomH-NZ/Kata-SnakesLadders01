@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using static SnakesLaddersKata01.SpecialActions;
 
 namespace SnakesLaddersKata01
 {
@@ -36,6 +38,7 @@ namespace SnakesLaddersKata01
 
         public string play(int die1, int die2) // using lowercase play as the kata needs it in CodeWars.
         {
+            
             var instruction = string.Empty;
             _turnCount++;
 
@@ -45,8 +48,21 @@ namespace SnakesLaddersKata01
             var stepsPastWinningSquare = playerLocations[currentPlayer] - WinningSquare;
             if (playerLocations[currentPlayer] > WinningSquare)
             {
-                playerLocations[currentPlayer] = WinningSquare - (stepsPastWinningSquare);
+                playerLocations[currentPlayer] = WinningSquare - stepsPastWinningSquare;
             }
+
+            switch (SpecialSquareMap(playerLocations[currentPlayer]))
+            {
+                case loseHealth:
+                    currentPlayer.LoseHealth();
+                    break;
+                case noAction:
+                    break;
+
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+            
             instruction = CreatePlayerMessage(LocationMap(playerLocations[currentPlayer]), currentPlayer);
             playerLocations[currentPlayer] = LocationMap(playerLocations[currentPlayer]);
             
@@ -89,6 +105,17 @@ namespace SnakesLaddersKata01
             return board.ContainsKey(location) ? board[location] : location;
         }
 
+        private static SpecialActions SpecialSquareMap(int location)
+        {
+            var healthBoard = new Dictionary<int, SpecialActions>()
+            {
+                {40, loseHealth},
+                {60, loseHealth}
+            };
+
+            return healthBoard.ContainsKey(location) ? healthBoard[location] : noAction;
+        }
+
         private string CreatePlayerMessage(int playerLocation, Player currentPlayer)
         {
             switch (hasWon)
@@ -110,6 +137,7 @@ namespace SnakesLaddersKata01
     }
 }
 
-// add player is dead function after switch(haswon).
-// needs access to current player health total. if health = 0, return Sorry, player is dead.
-// Add function isPlayerDead to the CreatePlayerMessage method.  
+// TODO: add player is dead function after switch(haswon).
+// TODO: needs access to current player health total. if health = 0, return Sorry, player is dead.
+// TODO: Add function isPlayerDead to the CreatePlayerMessage method.  
+// TODO: refactor, look at removing duplication (playerLocations[currentPlayer])
