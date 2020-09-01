@@ -35,7 +35,14 @@ namespace SnakesLaddersKata01
                 {playerTwo, 0}
             };
         }
-
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="die1"></param>
+        /// <param name="die2"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
         public string play(int die1, int die2) // using lowercase play as the kata needs it in CodeWars.
         {
             
@@ -51,21 +58,19 @@ namespace SnakesLaddersKata01
                 playerLocations[currentPlayer] = WinningSquare - stepsPastWinningSquare;
             }
 
-            switch (SpecialSquareMap(playerLocations[currentPlayer]))
+            switch (GameConfiguration.SpecialSquareMap(playerLocations[currentPlayer]))
             {
-                case loseHealth:
-                    currentPlayer.LoseHealth();
-                    break;
-                case noAction:
+                case LoseHealth:
+                    currentPlayer.LoseHealth(); break;
+                case NoAction:
                     break;
 
                 default:
                     throw new ArgumentOutOfRangeException();
             }
             
-            instruction = CreatePlayerMessage(LocationMap(playerLocations[currentPlayer]), currentPlayer);
-            playerLocations[currentPlayer] = LocationMap(playerLocations[currentPlayer]);
-            
+            instruction = CreatePlayerMessage(GameConfiguration.LocationMap(playerLocations[currentPlayer]), currentPlayer);
+            playerLocations[currentPlayer] = GameConfiguration.LocationMap(playerLocations[currentPlayer]);
 
             if (die1 == die2)
             {
@@ -73,47 +78,6 @@ namespace SnakesLaddersKata01
             }
             
             return instruction;
-        }
-
-        private static int LocationMap(int location)
-        {
-            var board = new Dictionary<int, int>()
-            {
-                {2, 38},
-                {7, 14},
-                {8, 31},
-                {15, 26},
-                {16, 6},
-                {21, 42},
-                {28, 84},
-                {36, 44},
-                {46, 25},
-                {49, 11},
-                {51, 67},
-                {62, 19},
-                {64, 60},
-                {71, 91},
-                {74, 53},
-                {78, 98},
-                {87, 94},
-                {89, 68},
-                {92, 88},
-                {95, 75},
-                {99, 80}
-            };
-
-            return board.ContainsKey(location) ? board[location] : location;
-        }
-
-        private static SpecialActions SpecialSquareMap(int location)
-        {
-            var healthBoard = new Dictionary<int, SpecialActions>()
-            {
-                {40, loseHealth},
-                {60, loseHealth}
-            };
-
-            return healthBoard.ContainsKey(location) ? healthBoard[location] : noAction;
         }
 
         private string CreatePlayerMessage(int playerLocation, Player currentPlayer)
@@ -137,7 +101,6 @@ namespace SnakesLaddersKata01
     }
 }
 
-// TODO: add player is dead function after switch(haswon).
+// TODO: add player is dead function after switch(haswon) / Add function isPlayerDead to the CreatePlayerMessage method.  
 // TODO: needs access to current player health total. if health = 0, return Sorry, player is dead.
-// TODO: Add function isPlayerDead to the CreatePlayerMessage method.  
-// TODO: refactor, look at removing duplication (playerLocations[currentPlayer])
+// TODO: refactor - remove duplication (playerLocations[currentPlayer]),

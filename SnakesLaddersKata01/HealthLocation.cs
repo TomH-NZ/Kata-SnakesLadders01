@@ -1,8 +1,8 @@
 namespace SnakesLaddersKata01
 {
-    enum SpecialActions
+    public enum SpecialActions
     {
-        loseHealth,
-        noAction
+        LoseHealth,
+        NoAction
     }
 }

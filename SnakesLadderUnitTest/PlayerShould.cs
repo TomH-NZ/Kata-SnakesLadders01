@@ -54,10 +54,11 @@ namespace SnakesLadderUnitTest
         public void LandOnLoseHealthSquare()
         {
             var firstPlayer = new Player("Player 1");
+            var secondPlayer = new Player("Player 2");
             var expectedPlayerHealth = 1;
-            var game = new SnakesLadders();
+            var game = new SnakesLadders(firstPlayer, secondPlayer);
             game.play(19, 21);
-            var actualPlayerHealth = Player.Health;
+            var actualPlayerHealth = firstPlayer.Health;
             Assert.Equal(expectedPlayerHealth, actualPlayerHealth);
         }
     }
