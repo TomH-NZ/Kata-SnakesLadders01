@@ -27,5 +27,10 @@ namespace SnakesLaddersKata01
         {
             return Health == 0;
         }
+
+        public void IncrementLocation(int squaresToMove)
+        {
+            Location += squaresToMove;
+        }
     }
 }
