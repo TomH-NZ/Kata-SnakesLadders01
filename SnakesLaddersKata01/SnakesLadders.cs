@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using static SnakesLaddersKata01.SpecialActions;
 
 namespace SnakesLaddersKata01
@@ -11,38 +10,21 @@ namespace SnakesLaddersKata01
         private static Player playerTwo;
         private int _turnCount;
         private const int WinningSquare = 100;
-        private bool hasWon = false;
-        private readonly Dictionary<Player, int> playerLocations; 
+        private bool hasWon;
         
         
         public SnakesLadders(Player firstPlayer, Player secondPlayer)
         {
             playerOne = firstPlayer;
             playerTwo = secondPlayer;
-            playerLocations = new Dictionary<Player, int>()
-            {
-                {playerOne, 0},
-                {playerTwo, 0}
-            };
         }
         public SnakesLadders()
         {
             playerOne = new Player("Player 1");
             playerTwo = new Player("Player 2");
-            playerLocations = new Dictionary<Player, int>()
-            {
-                {playerOne, 0},
-                {playerTwo, 0}
-            };
         }
         
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="die1"></param>
-        /// <param name="die2"></param>
-        /// <returns></returns>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
+
         public string play(int die1, int die2) // using lowercase play as the kata needs it in CodeWars.
         {
             
@@ -50,18 +32,22 @@ namespace SnakesLaddersKata01
             _turnCount++;
 
             var currentPlayer = _turnCount % 2 == 1 ? playerOne : playerTwo;
-
-            playerLocations[currentPlayer] += die1 + die2;
-            var stepsPastWinningSquare = playerLocations[currentPlayer] - WinningSquare;
-            if (playerLocations[currentPlayer] > WinningSquare)
+            
+            currentPlayer.Location += die1 + die2;
+            
+            var stepsPastWinningSquare = currentPlayer.Location - WinningSquare;
+            
+            if (currentPlayer.Location > WinningSquare)
             {
-                playerLocations[currentPlayer] = WinningSquare - stepsPastWinningSquare;
+                currentPlayer.Location = WinningSquare - stepsPastWinningSquare;
             }
 
-            switch (GameConfiguration.SpecialSquareMap(playerLocations[currentPlayer]))
+            switch (GameConfiguration.SpecialSquareMap(currentPlayer.Location))
             {
                 case LoseHealth:
-                    currentPlayer.LoseHealth(); break;
+                    currentPlayer.LoseHealth(); 
+                    break;
+                
                 case NoAction:
                     break;
 
@@ -69,8 +55,8 @@ namespace SnakesLaddersKata01
                     throw new ArgumentOutOfRangeException();
             }
             
-            instruction = CreatePlayerMessage(GameConfiguration.LocationMap(playerLocations[currentPlayer]), currentPlayer);
-            playerLocations[currentPlayer] = GameConfiguration.LocationMap(playerLocations[currentPlayer]);
+            instruction = CreatePlayerMessage(GameConfiguration.LocationMap(currentPlayer.Location), currentPlayer);
+            currentPlayer.Location = GameConfiguration.LocationMap(currentPlayer.Location);
 
             if (die1 == die2)
             {
@@ -103,4 +89,4 @@ namespace SnakesLaddersKata01
 
 // TODO: add player is dead function after switch(haswon) / Add function isPlayerDead to the CreatePlayerMessage method.  
 // TODO: needs access to current player health total. if health = 0, return Sorry, player is dead.
-// TODO: refactor - remove duplication (playerLocations[currentPlayer]),
+// TODO: refactor - remove duplication (currentPlayer.Location),
