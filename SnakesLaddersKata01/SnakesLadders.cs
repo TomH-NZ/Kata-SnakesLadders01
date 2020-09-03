@@ -24,6 +24,7 @@ namespace SnakesLaddersKata01
         {
             _turnCount++;
             
+            
             var currentPlayer = _turnCount % 2 == 1 ? _playerOne : _playerTwo;
    
             currentPlayer.IncrementLocation(die1 + die2);

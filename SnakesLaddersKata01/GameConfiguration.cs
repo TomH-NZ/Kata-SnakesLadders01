@@ -83,6 +83,15 @@ namespace SnakesLaddersKata01
                 case true:
                     return "Game over!";
             }
+
+            if (currentPlayer.IsPlayerDead())
+            {
+                return $"{currentPlayer.Name} has lost!";
+            }
+            
+            //call isPlayerDead function on Player class.
+            //if returns true, message == other player wins.
+            // returns false, game continues.
             
             switch (playerLocation)
             {
@@ -92,6 +101,7 @@ namespace SnakesLaddersKata01
                 default:
                     return $"{currentPlayer.Name} is on square {playerLocation}";
             }
+
             
         }
     }
