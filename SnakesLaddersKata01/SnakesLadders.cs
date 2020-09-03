@@ -1,37 +1,37 @@
-using System;
-
 namespace SnakesLaddersKata01
 {
     public class SnakesLadders
     {
-        private static Player playerOne;
-        private static Player playerTwo;
+        private static Player _playerOne;
+        private static Player _playerTwo;
+        private readonly GameConfiguration _gameConfiguration;
         private int _turnCount;
-
+        
         public SnakesLadders(Player firstPlayer, Player secondPlayer)
         {
-            playerOne = firstPlayer;
-            playerTwo = secondPlayer;
+            _playerOne = firstPlayer;
+            _playerTwo = secondPlayer;
+            _gameConfiguration = new GameConfiguration();
         }
         public SnakesLadders()
         {
-            playerOne = new Player("Player 1");
-            playerTwo = new Player("Player 2");
+            _playerOne = new Player("Player 1");
+            _playerTwo = new Player("Player 2");
+            _gameConfiguration = new GameConfiguration();
         }
         
-        public string play(int die1, int die2) // using lowercase play as the kata needs it in CodeWars.
+        public string Play(int die1, int die2)
         {
-            var instruction = string.Empty;
             _turnCount++;
-
-            var currentPlayer = _turnCount % 2 == 1 ? playerOne : playerTwo;
+            
+            var currentPlayer = _turnCount % 2 == 1 ? _playerOne : _playerTwo;
    
             currentPlayer.IncrementLocation(die1 + die2);
             
-            GameConfiguration.HandlePlayerMovePastWinningSquare(currentPlayer);
-            GameConfiguration.HandleActionIfPlayerLandsOnSpecialSquare(currentPlayer);
+            _gameConfiguration.HandlePlayerMovePastWinningSquare(currentPlayer);
+            _gameConfiguration.HandleActionIfPlayerLandsOnSpecialSquare(currentPlayer);
             
-            instruction = GameConfiguration.CreatePlayerMessage(GameConfiguration.MovePlayerIfOnSnakeOrLadder(currentPlayer.Location), currentPlayer);
+            var instruction = _gameConfiguration.CreatePlayerMessage(GameConfiguration.MovePlayerIfOnSnakeOrLadder(currentPlayer.Location), currentPlayer);
             currentPlayer.Location = GameConfiguration.MovePlayerIfOnSnakeOrLadder(currentPlayer.Location);
             
             if (die1 == die2)
@@ -46,4 +46,3 @@ namespace SnakesLaddersKata01
 
 // TODO: add player is dead function after switch(haswon) / Add function isPlayerDead to the CreatePlayerMessage method.  
 // TODO: needs access to current player health total. if health = 0, return Sorry, player is dead.
-// TODO: refactor - remove duplication (currentPlayer.Location),

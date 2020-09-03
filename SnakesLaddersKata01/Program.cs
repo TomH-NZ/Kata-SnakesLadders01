@@ -9,7 +9,7 @@ namespace SnakesLaddersKata01
             var game = new SnakesLadders();
             
             
-            Console.WriteLine(game.play(1,2));
+            Console.WriteLine(game.Play(1,2));
         }
     }
 }

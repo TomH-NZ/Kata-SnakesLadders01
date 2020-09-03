@@ -4,19 +4,20 @@ using static SnakesLaddersKata01.SpecialActions;
 
 namespace SnakesLaddersKata01
 {
-    public static class GameConfiguration
+    public class GameConfiguration
     {
         private const int WinningSquare = 100;
-        private static bool hasWon;
-        internal static SpecialActions SpecialSquareMap(int location)
+        private bool _hasWon;
+
+        private static SpecialActions SpecialSquareMap(int location)
         {
             var healthBoard = new Dictionary<int, SpecialActions>()
             {
-                {40, SpecialActions.LoseHealth},
-                {60, SpecialActions.NoAction}
+                {40, LoseHealth},
+                {60, NoAction}
             };
 
-            return healthBoard.ContainsKey(location) ? healthBoard[location] : SpecialActions.NoAction;
+            return healthBoard.ContainsKey(location) ? healthBoard[location] : NoAction;
         }
         
         internal static int MovePlayerIfOnSnakeOrLadder(int location) 
@@ -49,11 +50,11 @@ namespace SnakesLaddersKata01
             return board.ContainsKey(location) ? board[location] : location;
         }
         
-        internal static void HandleActionIfPlayerLandsOnSpecialSquare(Player currentPlayer)
+        internal  void HandleActionIfPlayerLandsOnSpecialSquare(Player currentPlayer)
         {
-            switch (GameConfiguration.SpecialSquareMap(currentPlayer.Location))
+            switch (SpecialSquareMap(currentPlayer.Location))
             {
-                case SpecialActions.LoseHealth:
+                case LoseHealth:
                     currentPlayer.LoseHealth();
                     break;
 
@@ -65,7 +66,7 @@ namespace SnakesLaddersKata01
             }
         }
 
-        internal static void HandlePlayerMovePastWinningSquare(Player currentPlayer)
+        internal  void HandlePlayerMovePastWinningSquare(Player currentPlayer)
         {
             var stepsPastWinningSquare = currentPlayer.Location - WinningSquare;
 
@@ -75,9 +76,9 @@ namespace SnakesLaddersKata01
             }
         }
 
-        internal static string CreatePlayerMessage(int playerLocation, Player currentPlayer)
+        internal  string CreatePlayerMessage(int playerLocation, Player currentPlayer)
         {
-            switch (hasWon)
+            switch (_hasWon)
             {
                 case true:
                     return "Game over!";
@@ -86,7 +87,7 @@ namespace SnakesLaddersKata01
             switch (playerLocation)
             {
                 case WinningSquare:
-                    hasWon = true;
+                    _hasWon = true;
                     return $"{currentPlayer.Name} Wins!";
                 default:
                     return $"{currentPlayer.Name} is on square {playerLocation}";
