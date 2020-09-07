@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using static SnakesLaddersKata01.SpecialActions;
 
 namespace SnakesLaddersKata01
 {
@@ -33,9 +35,17 @@ namespace SnakesLaddersKata01
                 {playerTwo, 0}
             };
         }
-
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="die1"></param>
+        /// <param name="die2"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
         public string play(int die1, int die2) // using lowercase play as the kata needs it in CodeWars.
         {
+            
             var instruction = string.Empty;
             _turnCount++;
 
@@ -45,11 +55,22 @@ namespace SnakesLaddersKata01
             var stepsPastWinningSquare = playerLocations[currentPlayer] - WinningSquare;
             if (playerLocations[currentPlayer] > WinningSquare)
             {
-                playerLocations[currentPlayer] = WinningSquare - (stepsPastWinningSquare);
+                playerLocations[currentPlayer] = WinningSquare - stepsPastWinningSquare;
             }
-            instruction = CreatePlayerMessage(LocationMap(playerLocations[currentPlayer]), $"{currentPlayer.Name}");
-            playerLocations[currentPlayer] = LocationMap(playerLocations[currentPlayer]);
+
+            switch (GameConfiguration.SpecialSquareMap(playerLocations[currentPlayer]))
+            {
+                case LoseHealth:
+                    currentPlayer.LoseHealth(); break;
+                case NoAction:
+                    break;
+
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
             
+            instruction = CreatePlayerMessage(GameConfiguration.LocationMap(playerLocations[currentPlayer]), currentPlayer);
+            playerLocations[currentPlayer] = GameConfiguration.LocationMap(playerLocations[currentPlayer]);
 
             if (die1 == die2)
             {
@@ -59,54 +80,27 @@ namespace SnakesLaddersKata01
             return instruction;
         }
 
-        private static int LocationMap(int location)
-        {
-            var board = new Dictionary<int, int>()
-            {
-                {2, 38},
-                {7, 14},
-                {8, 31},
-                {15, 26},
-                {16, 6},
-                {21, 42},
-                {28, 84},
-                {36, 44},
-                {46, 25},
-                {49, 11},
-                {51, 67},
-                {62, 19},
-                {64, 60},
-                {71, 91},
-                {74, 53},
-                {78, 98},
-                {87, 94},
-                {89, 68},
-                {92, 88},
-                {95, 75},
-                {99, 80}
-            };
-
-            return board.ContainsKey(location) ? board[location] : location;
-        }
-
-        private string CreatePlayerMessage(int playerLocation, string playerName)
+        private string CreatePlayerMessage(int playerLocation, Player currentPlayer)
         {
             switch (hasWon)
             {
                 case true:
                     return "Game over!";
             }
+            
             switch (playerLocation)
             {
                 case WinningSquare:
                     hasWon = true;
-                    return $"{playerName} Wins!";
+                    return $"{currentPlayer.Name} Wins!";
                 default:
-                    return $"{playerName} is on square {playerLocation}";
+                    return $"{currentPlayer.Name} is on square {playerLocation}";
             }
-
             
         }
     }
 }
 
+// TODO: add player is dead function after switch(haswon) / Add function isPlayerDead to the CreatePlayerMessage method.  
+// TODO: needs access to current player health total. if health = 0, return Sorry, player is dead.
+// TODO: refactor - remove duplication (playerLocations[currentPlayer]),
