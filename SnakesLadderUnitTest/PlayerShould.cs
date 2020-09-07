@@ -57,7 +57,7 @@ namespace SnakesLadderUnitTest
             var secondPlayer = new Player("Player 2");
             var expectedPlayerHealth = 1;
             var game = new SnakesLadders(firstPlayer, secondPlayer);
-            game.play(19, 21);
+            game.Play(19, 21);
             var actualPlayerHealth = firstPlayer.Health;
             Assert.Equal(expectedPlayerHealth, actualPlayerHealth);
         }
