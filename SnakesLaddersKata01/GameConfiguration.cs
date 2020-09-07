@@ -88,11 +88,7 @@ namespace SnakesLaddersKata01
             {
                 return $"{currentPlayer.Name} has lost!";
             }
-            
-            //call isPlayerDead function on Player class.
-            //if returns true, message == other player wins.
-            // returns false, game continues.
-            
+
             switch (playerLocation)
             {
                 case WinningSquare:
@@ -101,10 +97,7 @@ namespace SnakesLaddersKata01
                 default:
                     return $"{currentPlayer.Name} is on square {playerLocation}";
             }
-
-            
         }
     }
 }
 
-//
