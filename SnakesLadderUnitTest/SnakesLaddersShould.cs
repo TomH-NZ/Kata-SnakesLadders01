@@ -46,7 +46,6 @@ namespace SnakesLadderUnitTest
             Assert.Equal(expected, actual);
         }
         
-
         [Fact]
         public void PlayerTwoMoveCorrectly()
         {
@@ -59,13 +58,13 @@ namespace SnakesLadderUnitTest
         
         [Fact]
         public void CorrectWinConditionForPlayerOne()
-        {
-           var game = new SnakesLadders();
-           var actual = game.Play(50, 50);
-           var expected = "Player 1 Wins!";
-           Assert.Equal(expected, actual);
+        { 
+            var game = new SnakesLadders();
+            var actual = game.Play(50, 50);
+           var expectedValue = "Player 1 Wins!";
+           Assert.Equal(expectedValue, actual);
         }
-        
+
         [Fact]
         public void CorrectWinConditionForPlayerTwo()
         {
@@ -127,7 +126,9 @@ namespace SnakesLadderUnitTest
             var expected = "Player 9 is on square 3";
             var actual = game.Play(1, 2);
             Assert.Equal(expected, actual);
-        }[Fact]
+        }
+        
+        [Fact]
         public void CorrectSecondPlayerName()
         {
             var firstPlayer = new Player("Player 9");

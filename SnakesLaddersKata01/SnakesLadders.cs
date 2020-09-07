@@ -2,8 +2,8 @@ namespace SnakesLaddersKata01
 {
     public class SnakesLadders
     {
-        private static Player _playerOne;
-        private static Player _playerTwo;
+        private Player _playerOne;
+        private Player _playerTwo;
         private readonly GameConfiguration _gameConfiguration;
         private int _turnCount;
         
@@ -24,7 +24,6 @@ namespace SnakesLaddersKata01
         {
             _turnCount++;
             
-            
             var currentPlayer = _turnCount % 2 == 1 ? _playerOne : _playerTwo;
    
             currentPlayer.IncrementLocation(die1 + die2);
@@ -32,8 +31,8 @@ namespace SnakesLaddersKata01
             _gameConfiguration.HandlePlayerMovePastWinningSquare(currentPlayer);
             _gameConfiguration.HandleActionIfPlayerLandsOnSpecialSquare(currentPlayer);
             
-            var instruction = _gameConfiguration.CreatePlayerMessage(GameConfiguration.MovePlayerIfOnSnakeOrLadder(currentPlayer.Location), currentPlayer);
-            currentPlayer.Location = GameConfiguration.MovePlayerIfOnSnakeOrLadder(currentPlayer.Location);
+            var instruction = _gameConfiguration.CreatePlayerMessage(_gameConfiguration.MovePlayerIfOnSnakeOrLadder(currentPlayer.Location), currentPlayer);
+            currentPlayer.Location = _gameConfiguration.MovePlayerIfOnSnakeOrLadder(currentPlayer.Location);
             
             if (die1 == die2)
             {

@@ -1,4 +1,3 @@
-using System;
 using SnakesLaddersKata01;
 using Xunit;
 
@@ -69,6 +68,7 @@ namespace SnakesLadderUnitTest
             var firstPlayer = new Player("Player 10");
             var secondPlayer = new Player("Player 20");
             var game = new SnakesLadders(firstPlayer, secondPlayer);
+
             
             //Act
             firstPlayer.LoseHealth();
@@ -78,18 +78,6 @@ namespace SnakesLadderUnitTest
 
             //Assert
             Assert.Equal(expectedResult, actualResult);
-        }[Fact]
-        public void GivenForAPlayer_WhenAPlayersHealthIsZero_ThenOtherPlayerWinsGame2()
-        {
-            //Arrange
-            var firstPlayer = new Player("Player 10");
-            var secondPlayer = new Player("Player 10");
-
-            
-            //Assert
-            Assert.Equal(firstPlayer.Name, secondPlayer.Name); // will pass due to both being reference types that behave like value types
-            Assert.Equal(firstPlayer, secondPlayer); // will fail due to both being reference types
-            Assert.Equal(firstPlayer.Health, secondPlayer.Health); // will pass due to both being value types
         }
     }
 }

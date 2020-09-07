@@ -9,7 +9,7 @@ namespace SnakesLaddersKata01
         private const int WinningSquare = 100;
         private bool _hasWon;
 
-        private static SpecialActions SpecialSquareMap(int location)
+        private SpecialActions SpecialSquareMap(int location)
         {
             var healthBoard = new Dictionary<int, SpecialActions>()
             {
@@ -20,7 +20,7 @@ namespace SnakesLaddersKata01
             return healthBoard.ContainsKey(location) ? healthBoard[location] : NoAction;
         }
         
-        internal static int MovePlayerIfOnSnakeOrLadder(int location) 
+        internal int MovePlayerIfOnSnakeOrLadder(int location) 
         {
             var board = new Dictionary<int, int>()
             {
@@ -106,3 +106,5 @@ namespace SnakesLaddersKata01
         }
     }
 }
+
+//
