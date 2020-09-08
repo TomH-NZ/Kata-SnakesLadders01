@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace SnakesLaddersKata01
 {
     public class SnakesLadders
@@ -6,6 +8,15 @@ namespace SnakesLaddersKata01
         private Player _playerTwo;
         private readonly GameConfiguration _gameConfiguration;
         private int _turnCount;
+        private List<Player> players = new List<Player>();
+
+        public SnakesLadders(List<string> playerNames)
+        {
+            foreach (var name in playerNames)
+            {
+                players.Add(new Player(name));
+            }
+        }
         
         public SnakesLadders(Player firstPlayer, Player secondPlayer)
         {

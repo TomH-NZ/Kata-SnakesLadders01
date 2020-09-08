@@ -11,4 +11,13 @@ A link to [Jekyll Now Markdown Guide](https://raw.githubusercontent.com/barrycla
 - Create default players / player names.
 - Change the turncount system to recognise new number of players.
 - Change tests to use new player numbers.
+- Changing win message to use other player
+- Change win condition if one player dies while other players still active
+
+
+### Technical notes around construction 
+
+- Enter player names through the console, save to list.
+- Use list length to set total number of players.
+- Pass list of players through mock for testing
 - 
