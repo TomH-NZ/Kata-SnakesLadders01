@@ -68,3 +68,20 @@ namespace SnakesLaddersKata01
 
 // TODO: add player is dead function after switch(haswon) / Add function isPlayerDead to the CreatePlayerMessage method.  
 // TODO: needs access to current player health total. if health = 0, return Sorry, player is dead.
+//TODO: use variation of below script to calculate modulo, current player:
+
+/*
+Console.WriteLine("Enter a player count: ");
+var playerCount = int.Parse(Console.ReadLine());
+            
+Console.WriteLine("Enter a max turn count: ");
+var maxTurnCount = int.Parse(Console.ReadLine());
+Console.ReadLine();
+
+var index = 0;
+while (index < maxTurnCount)
+{
+var results = index % playerCount;
+Console.WriteLine(results);
+index++;
+}*/
