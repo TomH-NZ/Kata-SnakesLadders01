@@ -40,6 +40,13 @@ namespace SnakesLaddersKata01
             _turnCount++;
             
             var currentPlayer = _turnCount % 2 == 1 ? _playerOne : _playerTwo; //work out player index based on turn count and number of players
+
+            /*var moduloLeftOver = _turnCount % players.Count;
+
+            switch ()
+            {
+                use switch/case. Have currentPlayer = moduloLeftOver + 1. 
+            }*/
    
             currentPlayer.IncrementLocation(die1 + die2);
             
