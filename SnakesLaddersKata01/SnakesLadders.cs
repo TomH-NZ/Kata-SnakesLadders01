@@ -22,12 +22,16 @@ namespace SnakesLaddersKata01
         {
             _playerOne = firstPlayer;
             _playerTwo = secondPlayer;
+            players.Add(firstPlayer);
+            players.Add(secondPlayer);
             _gameConfiguration = new GameConfiguration();
         }
         public SnakesLadders()
         {
             _playerOne = new Player("Player 1");
             _playerTwo = new Player("Player 2");
+            players.Add(new Player("Player 1")); // look at way of concat the two lines
+            players.Add(new Player("Player 2"));
             _gameConfiguration = new GameConfiguration();
         }
         
@@ -35,7 +39,7 @@ namespace SnakesLaddersKata01
         {
             _turnCount++;
             
-            var currentPlayer = _turnCount % 2 == 1 ? _playerOne : _playerTwo;
+            var currentPlayer = _turnCount % 2 == 1 ? _playerOne : _playerTwo; //work out player index based on turn count and number of players
    
             currentPlayer.IncrementLocation(die1 + die2);
             
