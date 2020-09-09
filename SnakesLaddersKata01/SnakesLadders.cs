@@ -4,8 +4,6 @@ namespace SnakesLaddersKata01
 {
     public class SnakesLadders
     {
-        private Player _playerOne;
-        private Player _playerTwo;
         private readonly GameConfiguration _gameConfiguration;
         private int _turnCount;
         private List<Player> players = new List<Player>();
@@ -16,20 +14,17 @@ namespace SnakesLaddersKata01
             {
                 players.Add(new Player(name));
             }
-        }
-        
-        public SnakesLadders(Player firstPlayer, Player secondPlayer)
-        {
-            _playerOne = firstPlayer;
-            _playerTwo = secondPlayer;
-            players.Add(firstPlayer);
-            players.Add(secondPlayer);
             _gameConfiguration = new GameConfiguration();
         }
+        
+        public SnakesLadders(List<Player> playerList)
+        {
+            players = playerList;
+            _gameConfiguration = new GameConfiguration();
+        }
+
         public SnakesLadders()
         {
-            _playerOne = new Player("Player 1");
-            _playerTwo = new Player("Player 2");
             players.Add(new Player("Player 1")); // look at way of concat the two lines
             players.Add(new Player("Player 2"));
             _gameConfiguration = new GameConfiguration();
@@ -37,16 +32,9 @@ namespace SnakesLaddersKata01
         
         public string Play(int die1, int die2)
         {
-            _turnCount++;
-            
-            var currentPlayer = _turnCount % 2 == 1 ? _playerOne : _playerTwo; //work out player index based on turn count and number of players
+            var moduloValue = _turnCount % players.Count;
+            var currentPlayer = players[moduloValue];
 
-            /*var moduloLeftOver = _turnCount % players.Count;
-
-            switch ()
-            {
-                use switch/case. Have currentPlayer = moduloLeftOver + 1. 
-            }*/
    
             currentPlayer.IncrementLocation(die1 + die2);
             
@@ -56,7 +44,7 @@ namespace SnakesLaddersKata01
             var instruction = _gameConfiguration.CreatePlayerMessage(_gameConfiguration.MovePlayerIfOnSnakeOrLadder(currentPlayer.Location), currentPlayer);
             currentPlayer.Location = _gameConfiguration.MovePlayerIfOnSnakeOrLadder(currentPlayer.Location);
             
-            if (die1 == die2)
+            if (die1 != die2)
             {
                 _turnCount++;
             }

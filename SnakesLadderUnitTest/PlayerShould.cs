@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using SnakesLaddersKata01;
 using Xunit;
 
@@ -52,12 +53,16 @@ namespace SnakesLadderUnitTest
         [Fact]
         public void LandOnLoseHealthSquare()
         {
-            var firstPlayer = new Player("Player 1");
-            var secondPlayer = new Player("Player 2");
+            var playerNames = new List<string>()
+            {
+                "Player 1",
+                "Player 2",
+                "Player 3"
+            };
             var expectedPlayerHealth = 1;
-            var game = new SnakesLadders(firstPlayer, secondPlayer);
+            var game = new SnakesLadders(playerNames);
             game.Play(19, 21);
-            var actualPlayerHealth = firstPlayer.Health;
+            var actualPlayerHealth = currentPlayer.Health;
             Assert.Equal(expectedPlayerHealth, actualPlayerHealth);
         }
         
@@ -65,9 +70,13 @@ namespace SnakesLadderUnitTest
         public void GivenForAPlayer_WhenAPlayersHealthIsZero_ThenOtherPlayerWinsGame()
         {
             //Arrange
-            var firstPlayer = new Player("Player 10");
-            var secondPlayer = new Player("Player 20");
-            var game = new SnakesLadders(firstPlayer, secondPlayer);
+            var playerNames = new List<string>()
+            {
+                "Player 1",
+                "Player 2",
+                "Player 3"
+            };
+            var game = new SnakesLadders(playerNames);
 
             
             //Act

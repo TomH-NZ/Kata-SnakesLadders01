@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using SnakesLaddersKata01;
 using Xunit;
 
@@ -8,9 +9,12 @@ namespace SnakesLadderUnitTest
         [Fact]
         public void PlayerOneMoveCorrectly()
         {
-            var firstPlayer = new Player("Player 1");
-            var secondPlayer = new Player("Player 2");
-            var game = new SnakesLadders(firstPlayer, secondPlayer);
+            var playerNames = new List<string>()
+            {
+                "Player 1",
+                "Player 2"
+            };
+            var game = new SnakesLadders(playerNames);
             var actual = game.Play(3, 2);
             var expected = "Player 1 is on square 5";
             Assert.Equal(expected, actual);
@@ -120,9 +124,12 @@ namespace SnakesLadderUnitTest
         [Fact]
         public void CorrectFirstPlayerName()
         {
-            var firstPlayer = new Player("Player 9");
-            var secondPlayer = new  Player("Player 6");
-            var game = new SnakesLadders(firstPlayer, secondPlayer);
+            var playerNames = new List<string>()
+            {
+                "Player 6",
+                "Player 9"
+            };
+            var game = new SnakesLadders(playerNames);
             var expected = "Player 9 is on square 3";
             var actual = game.Play(1, 2);
             Assert.Equal(expected, actual);
@@ -131,16 +138,39 @@ namespace SnakesLadderUnitTest
         [Fact]
         public void CorrectSecondPlayerName()
         {
-            var firstPlayer = new Player("Player 9");
-            var secondPlayer = new  Player("Player 6");
-            var game = new SnakesLadders(firstPlayer, secondPlayer);
+            var playerNames = new List<string>()
+            {
+                "Player 6",
+                "Player 9"
+            };
+            var game = new SnakesLadders(playerNames);
             var expected = "Player 6 is on square 3";
             game.Play(5, 6);
             var actual = game.Play(1, 2);
             Assert.Equal(expected, actual);
         }
 
-        
+        [Fact]
+        public void GivenThreePlayersArePlaying_WhenDoubleDiceIsRolled_ThenPlayerHasAnotherTurn()
+        {
+            //Arrange
+            var playerNames = new List<string>()
+            {
+                "Player 1",
+                "Player 2",
+                "Player 3"
+            };
+                
+            //Act
+            var game = new SnakesLadders(playerNames);
+            game.Play(1, 1);
+            
+            var actualResult = game.Play(1,2);
+            var expectedResult = "Player 1 is on square 41";
+            
+            //Assert
+            Assert.Equal(expectedResult, actualResult);
+        }
     }
 }
 
