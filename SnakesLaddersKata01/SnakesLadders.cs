@@ -38,11 +38,11 @@ namespace SnakesLaddersKata01
    
             currentPlayer.IncrementLocation(die1 + die2);
             
-            _gameConfiguration.HandlePlayerMovePastWinningSquare(currentPlayer);
-            _gameConfiguration.HandleActionIfPlayerLandsOnSpecialSquare(currentPlayer);
+            GameConfiguration.HandlePlayerMovePastWinningSquare(currentPlayer);
+            GameConfiguration.HandleActionIfPlayerLandsOnSpecialSquare(currentPlayer);
             
-            var instruction = _gameConfiguration.CreatePlayerMessage(_gameConfiguration.MovePlayerIfOnSnakeOrLadder(currentPlayer.Location), currentPlayer);
-            currentPlayer.Location = _gameConfiguration.MovePlayerIfOnSnakeOrLadder(currentPlayer.Location);
+            var instruction = _gameConfiguration.CreatePlayerMessage(GameConfiguration.MovePlayerIfOnSnakeOrLadder(currentPlayer.Location), currentPlayer);
+            currentPlayer.Location = GameConfiguration.MovePlayerIfOnSnakeOrLadder(currentPlayer.Location);
             
             if (die1 != die2)
             {

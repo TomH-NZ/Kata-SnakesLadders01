@@ -126,8 +126,8 @@ namespace SnakesLadderUnitTest
         {
             var playerNames = new List<string>()
             {
-                "Player 6",
-                "Player 9"
+                "Player 9",
+                "Player 6"
             };
             var game = new SnakesLadders(playerNames);
             var expected = "Player 9 is on square 3";
@@ -140,8 +140,8 @@ namespace SnakesLadderUnitTest
         {
             var playerNames = new List<string>()
             {
-                "Player 6",
-                "Player 9"
+                "Player 9",
+                "Player 6"
             };
             var game = new SnakesLadders(playerNames);
             var expected = "Player 6 is on square 3";
@@ -170,6 +170,14 @@ namespace SnakesLadderUnitTest
             
             //Assert
             Assert.Equal(expectedResult, actualResult);
+        }
+
+        [Fact]
+        public void LoseHealthOnSquare40() 
+        {
+            var game = new SnakesLadders();
+            game.Play(19, 21);
+            //not possible for player to die yet.
         }
     }
 }
