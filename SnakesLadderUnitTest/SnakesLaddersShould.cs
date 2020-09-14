@@ -117,7 +117,7 @@ namespace SnakesLadderUnitTest
             game.Play(48, 48);
             game.Play(1,3);
             var actual = game.Play(1, 2);
-            var expected = "Game over!";
+            var expected = "Game Over!";
             Assert.Equal(expected, actual);
         }
 
@@ -175,7 +175,7 @@ namespace SnakesLadderUnitTest
         [Fact]
         public void LoseHealthOnSquare40() 
         {
-            var game = new SnakesLadders();
+            var game = new SnakesLadders(); // when testing void can just call the function itself, without needing to new / var
             game.Play(19, 21);
             //not possible for player to die yet.
         }

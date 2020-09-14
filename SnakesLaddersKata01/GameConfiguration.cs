@@ -7,14 +7,14 @@ namespace SnakesLaddersKata01
     public class GameConfiguration
     {
         private const int WinningSquare = 100;
-        private bool _hasWon;
+        private bool _otherPlayerHasAlreadyWon;
 
         private static SpecialActions SpecialSquareMap(int location)
         {
             var healthBoard = new Dictionary<int, SpecialActions>()
             {
                 {40, LoseHealth},
-                {60, NoAction}
+                {60, LoseHealth}
             };
 
             return healthBoard.ContainsKey(location) ? healthBoard[location] : NoAction;
@@ -76,26 +76,25 @@ namespace SnakesLaddersKata01
             }
         }
 
-        public  string CreatePlayerMessage(int playerLocation, Player currentPlayer)
+        public  string CreatePlayerMessage(Player currentPlayer)
         {
-            switch (_hasWon)
-            {
-                case true:
-                    return "Game over!";
-            }
-
             if (currentPlayer.IsPlayerDead())
             {
                 return $"{currentPlayer.Name} has lost!";
             }
-
-            switch (playerLocation)
+            
+            if (_otherPlayerHasAlreadyWon)
+            {
+                return "Game Over!";
+            }
+            
+            switch (currentPlayer.Location)
             {
                 case WinningSquare:
-                    _hasWon = true;
+                    _otherPlayerHasAlreadyWon = true;
                     return $"{currentPlayer.Name} Wins!";
                 default:
-                    return $"{currentPlayer.Name} is on square {playerLocation}";
+                    return $"{currentPlayer.Name} is on square {currentPlayer.Location}";
             }
         }
     }

@@ -41,8 +41,9 @@ namespace SnakesLaddersKata01
             GameConfiguration.HandlePlayerMovePastWinningSquare(currentPlayer);
             GameConfiguration.HandleActionIfPlayerLandsOnSpecialSquare(currentPlayer);
             
-            var instruction = _gameConfiguration.CreatePlayerMessage(GameConfiguration.MovePlayerIfOnSnakeOrLadder(currentPlayer.Location), currentPlayer);
             currentPlayer.Location = GameConfiguration.MovePlayerIfOnSnakeOrLadder(currentPlayer.Location);
+            var instruction = _gameConfiguration.CreatePlayerMessage(currentPlayer);
+            
             
             if (die1 != die2)
             {
@@ -54,8 +55,7 @@ namespace SnakesLaddersKata01
     }
 }
 
-// TODO: add player is dead function after switch(haswon) / Add function isPlayerDead to the CreatePlayerMessage method.  
-// TODO: needs access to current player health total. if health = 0, return Sorry, player is dead.
+  
 //TODO: use variation of below script to calculate modulo, current player:
 
 /*

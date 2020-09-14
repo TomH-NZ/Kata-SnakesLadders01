@@ -10,7 +10,7 @@ namespace SnakesLaddersKata01
         {
             var playerNames = new List<string>();
             
-            playerNameEntry(playerNames);
+            PlayerNameEntry(playerNames);
 
             foreach (var name in playerNames)
             {
@@ -23,7 +23,7 @@ namespace SnakesLaddersKata01
             //Console.WriteLine(game.Play(1,2));
         }
 
-        private static void playerNameEntry(List<string> playerNames)
+        private static void PlayerNameEntry(List<string> playerNames)
         {
             while (true)
             {
