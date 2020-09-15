@@ -36,7 +36,7 @@ namespace SnakesLadderUnitTest
         }
 
         [Fact]
-        public void LoseHealthOnASpecialSquare() // should mock the player for testing.
+        public void LoseHealthOnASpecialSquare()
         {
             const int expectedPlayerHealth = 1;
             player.Location = 40;
@@ -47,7 +47,6 @@ namespace SnakesLadderUnitTest
         [Fact]
         public void ReturnNoAction()
         {
-            //var player = new Player("Player 3"); // because Player has already been created through the constructor at the top, it doesn't need to be used with each test.
             const int expectedPlayerHealth = 2;
             player.Location = 13;
             GameConfiguration.HandleActionIfPlayerLandsOnSpecialSquare(player);
@@ -85,11 +84,42 @@ namespace SnakesLadderUnitTest
         public void ReturnGameOverWhenOtherPlayerHasAlreadyWon()
         {
             var player2 = new Player("Player 2");
-            var expectedWinningMessage = "Game Over!";
-            var _gameConfiguration = new GameConfiguration();
+            var gameConfiguration = new GameConfiguration();
             player.Location = 100;
-            var actualWinningMessage = _gameConfiguration.CreatePlayerMessage(player2);
+            player2.Location = 2;
+            gameConfiguration.CreatePlayerMessage(player);
+            var expectedWinningMessage = "Game Over!";
+            var actualWinningMessage = gameConfiguration.CreatePlayerMessage(player2);
             Assert.Equal(expectedWinningMessage, actualWinningMessage);
+        }
+
+        [Fact]
+        public void ReturnPlayerOneIsDeadMessage()
+        {
+            player.LoseHealth();
+            player.LoseHealth();
+            player.IsPlayerDead();
+            var gameConfiguration = new GameConfiguration();
+            var expectedPlayerMessage = "Player 1 has lost!";
+            Assert.Equal(expectedPlayerMessage, gameConfiguration.CreatePlayerMessage(player));
+        }
+
+        [Fact]
+        public void ReturnPlayerOneWinsMessage()
+        {
+            player.Location = 100;
+            var gameConfiguration = new GameConfiguration();
+            var expectedPlayerMessage = "Player 1 Wins!";
+            Assert.Equal(expectedPlayerMessage, gameConfiguration.CreatePlayerMessage(player));
+        }
+
+        [Fact]
+        public void ReturnPlayerOneLocationMessage()
+        {
+            player.Location = 10;
+            var gameConfiguration = new GameConfiguration();
+            var expectedPlayerMessage = "Player 1 is on square 10";
+            Assert.Equal(expectedPlayerMessage, gameConfiguration.CreatePlayerMessage(player));
         }
     }
 }

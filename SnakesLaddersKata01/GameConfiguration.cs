@@ -78,14 +78,15 @@ namespace SnakesLaddersKata01
 
         public  string CreatePlayerMessage(Player currentPlayer)
         {
-            if (currentPlayer.IsPlayerDead())
-            {
-                return $"{currentPlayer.Name} has lost!";
-            }
             
             if (_otherPlayerHasAlreadyWon)
             {
                 return "Game Over!";
+            }
+            
+            if (currentPlayer.IsPlayerDead())
+            {
+                return $"{currentPlayer.Name} has lost!";
             }
             
             switch (currentPlayer.Location)
