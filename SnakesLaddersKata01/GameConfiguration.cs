@@ -76,7 +76,7 @@ namespace SnakesLaddersKata01
             }
         }
 
-        public  string CreatePlayerMessage(Player currentPlayer)
+        public string CreatePlayerMessage(Player currentPlayer)
         {
             
             if (_otherPlayerHasAlreadyWon)

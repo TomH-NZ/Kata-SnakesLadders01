@@ -18,21 +18,21 @@ A link to [Jekyll Now Markdown Guide](https://raw.githubusercontent.com/barrycla
 
 ### Technical notes around construction 
 
-- Enter player names through the console, save to list.
-- Use list length to set total number of players.
+- ~~Enter player names through the console, save to list.~~
+- ~~Use list length to set total number of players.~~
 - Pass list of players through mock for testing
 - 
 
 
 ### Future Enhancements
 
-- public SnakesLadders(List<Player> playerList)
+- ~~public SnakesLadders(List<Player> playerList)
         {
             players = playerList;
             _gameConfiguration = new GameConfiguration();
-        }
+        }~~
         
-To get this working, extract each entry in playerList using a ForEach loop, extract out to a new object and add to existing players list.
+~~To get this working, extract each entry in playerList using a ForEach loop, extract out to a new object and add to existing players list.~~
 
 
 - 

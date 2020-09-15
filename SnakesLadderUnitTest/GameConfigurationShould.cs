@@ -98,7 +98,6 @@ namespace SnakesLadderUnitTest
         {
             player.LoseHealth();
             player.LoseHealth();
-            player.IsPlayerDead();
             var gameConfiguration = new GameConfiguration();
             var expectedPlayerMessage = "Player 1 has lost!";
             Assert.Equal(expectedPlayerMessage, gameConfiguration.CreatePlayerMessage(player));
