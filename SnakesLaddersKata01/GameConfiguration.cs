@@ -7,20 +7,20 @@ namespace SnakesLaddersKata01
     public class GameConfiguration
     {
         private const int WinningSquare = 100;
-        private bool _hasWon;
+        private bool _otherPlayerHasAlreadyWon;
 
-        private SpecialActions SpecialSquareMap(int location)
+        private static SpecialActions SpecialSquareMap(int location)
         {
             var healthBoard = new Dictionary<int, SpecialActions>()
             {
                 {40, LoseHealth},
-                {60, NoAction}
+                {60, LoseHealth}
             };
 
             return healthBoard.ContainsKey(location) ? healthBoard[location] : NoAction;
         }
         
-        internal int MovePlayerIfOnSnakeOrLadder(int location) 
+        public static int MovePlayerIfOnSnakeOrLadder(int location) 
         {
             var board = new Dictionary<int, int>()
             {
@@ -50,7 +50,7 @@ namespace SnakesLaddersKata01
             return board.ContainsKey(location) ? board[location] : location;
         }
         
-        internal  void HandleActionIfPlayerLandsOnSpecialSquare(Player currentPlayer)
+        public static void HandleActionIfPlayerLandsOnSpecialSquare(Player currentPlayer)
         {
             switch (SpecialSquareMap(currentPlayer.Location))
             {
@@ -66,7 +66,7 @@ namespace SnakesLaddersKata01
             }
         }
 
-        internal  void HandlePlayerMovePastWinningSquare(Player currentPlayer)
+        public static void HandlePlayerMovePastWinningSquare(Player currentPlayer)
         {
             var stepsPastWinningSquare = currentPlayer.Location - WinningSquare;
 
@@ -76,26 +76,26 @@ namespace SnakesLaddersKata01
             }
         }
 
-        internal  string CreatePlayerMessage(int playerLocation, Player currentPlayer)
+        public string CreatePlayerMessage(Player currentPlayer)
         {
-            switch (_hasWon)
+            
+            if (_otherPlayerHasAlreadyWon)
             {
-                case true:
-                    return "Game over!";
+                return "Game Over!";
             }
-
+            
             if (currentPlayer.IsPlayerDead())
             {
                 return $"{currentPlayer.Name} has lost!";
             }
-
-            switch (playerLocation)
+            
+            switch (currentPlayer.Location)
             {
                 case WinningSquare:
-                    _hasWon = true;
+                    _otherPlayerHasAlreadyWon = true;
                     return $"{currentPlayer.Name} Wins!";
                 default:
-                    return $"{currentPlayer.Name} is on square {playerLocation}";
+                    return $"{currentPlayer.Name} is on square {currentPlayer.Location}";
             }
         }
     }
