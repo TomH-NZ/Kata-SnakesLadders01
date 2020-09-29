@@ -1,5 +1,6 @@
 using SnakesLaddersKata01;
 using Xunit;
+using Moq;
 
 namespace SnakesLadderUnitTest
 {
@@ -10,7 +11,7 @@ namespace SnakesLadderUnitTest
         {
             player = new Player("Player 1");
         }
-        
+
         [Fact]
         public void ReturnCorrectSquareIfNoSnakeOrLadder()
         {
@@ -50,6 +51,15 @@ namespace SnakesLadderUnitTest
             const int expectedPlayerHealth = 2;
             player.Location = 13;
             GameConfiguration.HandleActionIfPlayerLandsOnSpecialSquare(player);
+            Assert.Equal(expectedPlayerHealth, player.Health);
+        }
+        
+        public void LoseHealthIsCalledOnSpecialSquare()
+        {
+            var playerMock = new Mock<IPlayer>();
+            const int expectedPlayerHealth = 1;
+            player.Location = 40;
+            GameConfiguration.HandleActionIfPlayerLandsOnSpecialSquare(playerMock);
             Assert.Equal(expectedPlayerHealth, player.Health);
         }
 

@@ -1,6 +1,6 @@
 namespace SnakesLaddersKata01
 {
-    public class Player
+    public class Player : IPlayer
     {
         public string Name { get; }
         public int Health { get; private set; }

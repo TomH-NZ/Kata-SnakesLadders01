@@ -50,7 +50,7 @@ namespace SnakesLaddersKata01
             return board.ContainsKey(location) ? board[location] : location;
         }
         
-        public static void HandleActionIfPlayerLandsOnSpecialSquare(Player currentPlayer)
+        public static void HandleActionIfPlayerLandsOnSpecialSquare(IPlayer currentPlayer)
         {
             switch (SpecialSquareMap(currentPlayer.Location))
             {
